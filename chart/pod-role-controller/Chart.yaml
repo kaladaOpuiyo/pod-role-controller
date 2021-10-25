@@ -1,0 +1,4 @@
+apiVersion: v2
+description: A controller is used to dynamically associate pods of a deployment to a role.
+name: pod-role-controller
+version: 0.0.1

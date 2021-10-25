@@ -1,0 +1,15 @@
+apiVersion: controller.pod.role.controller.io/v1alpha1
+kind: PodRoleController
+metadata:
+  name: pod-role-controller
+  namespace: ops
+spec:
+  deployments:
+    # - nginx
+    - hello-world
+  role: dev-priv
+  labelSelector: "app"
+  resources:
+    - pods/portforward
+    - pods/exec
+    - pods/logs

@@ -1,0 +1,19 @@
+domain: pod.role.controller.io
+layout:
+- go.kubebuilder.io/v3
+plugins:
+  manifests.sdk.operatorframework.io/v2: {}
+  scorecard.sdk.operatorframework.io/v2: {}
+projectName: pod-role-controller
+repo: github.com/kaladaopuiyo/pod-role-controller
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: pod.role.controller.io
+  group: controller
+  kind: PodRoleController
+  path: github.com/kaladaopuiyo/pod-role-controller/api/v1alpha1
+  version: v1alpha1
+version: "3"

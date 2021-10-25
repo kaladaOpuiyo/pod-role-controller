@@ -1,0 +1,85 @@
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ .Values.app.name }}
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  - pods/logs
+  - pods/exec
+  - pods/portforward
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - pods/logs
+  - pods/exec
+  - pods/portforward
+  verbs:
+  - create
+  - get
+  - list
+  - watch
+- apiGroups:
+  - apps
+  resources:
+  - replicasets
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - controller.pod.role.controller.io
+  resources:
+  - podrolecontrollers
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - controller.pod.role.controller.io
+  resources:
+  - podrolecontrollers/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - controller.pod.role.controller.io
+  resources:
+  - podrolecontrollers/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - rbac.authorization.k8s.io
+  resources:
+  - roles
+  verbs:
+  - get
+  - list
+  - patch
+  - update
+  - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ .Values.app.name }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ .Values.app.name }}
+subjects:
+- kind: ServiceAccount
+  name: {{ .Values.app.name }}
+  namespace: {{ .Release.Namespace }}

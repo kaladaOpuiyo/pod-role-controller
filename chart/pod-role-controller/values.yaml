@@ -1,0 +1,15 @@
+replicaCount: 1
+logLevel: info
+image:
+  repository: pod-role-controller
+  tag: latest 
+  pullPolicy: Always
+app:
+  name: pod-role-controller
+resources:
+  limits:
+    cpu: 100m
+    memory: 100Mi
+  requests:
+    cpu: 100m
+    memory: 100Mi
